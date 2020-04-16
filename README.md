@@ -5,12 +5,15 @@ To complie the codes, the blitz++ and gsl are required. The gsl may NOT compatib
 Need help? Contact me via e-mail: aeolia.zafiro@gmail.com
 
 Usage:
+
 ./seq_sim --evolving_sequence=path --reference_sequence=path --codon_file=path --substitution_file=path --seq_length=int --mutation_rate=double --Evolution_days=int --Pre_evolution_days=int --time_interval=int --simulation_times=int --Divergency_mutations=int --Divergency_sampling_times=int --output_evo_seq_file=int --KaKS=double
 
 example:
+
 ./seq_simu --evolving_sequence=./Sars_cov_2_orig.txt --reference_sequence=./TG13_orig.txt --codon_file=./codon.txt --substitution_file=./substitution.txt --seq_length=29274 --mutation_rate=0.2542 --Evolution_days=30000 --Pre_evolution_days=20500 --time_interval=100 --simulation_times=100 --Divergency_mutations=450 --Divergency_sampling_times=100 --output_evo_seq_file=0 --KaKS=0.05
   
   Input:
+  
   evolving_sequence: The target sequence to be evolving. Any sequence is suitable. 
   
   reference_sequence: A reference sequence to calculate the similarity at the whole sequence level.
@@ -41,13 +44,19 @@ example:
   
     
   Note:
+  
   1, In order to make the program run easily, all Base and amino acids names should convert into digital. Here we stipulate the A=1, T=2, G=3, C=4, others (including gaps)=0. the amino acids could convert any int type digital as you like.
+  
   2, The evolving_sequence reference_sequence should be aligned before inputting to the program.
+  
   3, The formate of evolving_sequence and reference_sequence is a txt formate file with space character is used as the column delimiter.
+  
   4, The codon_file is a 62 x 4 (row x column) file (codon.txt). The substitution_file is a 12 x 4 (row x column) file (substitution.txt). Users can generate these two files to suit their objects. if the dimension is not the same as the examples, one easy way is to fill the related rows with 0. OR recreated the dimension settings on related .hpp files.
         
   Output:
+  
   The program output .txt files:
+  
   1, Parameters.txt: list the input parameters to run the program.
   
   2, similarity_ref_evo.txt: The divergency between ref and evo sequences. [colunms: filelables; over_all_divergency; synonymous_site_divergency; non-synonymous_site_divergency].

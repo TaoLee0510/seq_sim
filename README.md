@@ -1,7 +1,14 @@
 # seq_sim
 in-silico evolutionary process to identify the confidence of phylogeny tree based on a specific out-group or out-groups. 
+To complie the codes, the blitz++, PNG Writer and gsl are required. The gsl may NOT compatible with Windows system, please switch to MacOS or a Linux based system.
+
+Need help? Contact me via e-mail: aeolia.zafiro@gmail.com
+
 Usage:
 ./seq_sim --evolving_sequence=path --reference_sequence=path --codon_file=path --substitution_file=path --seq_length=int --mutation_rate=double --Evolution_days=int --Pre_evolution_days=int --time_interval=int --simulation_times=int --Divergency_mutations=int --Divergency_sampling_times=int --KaKS=double
+
+example:
+./seq_simu --evolving_sequence=./Sars_cov_2_orig.txt --reference_sequence=./TG13_orig.txt --codon_file=./codon.txt --substitution_file=./substitution.txt --seq_length=29274 --mutation_rate=0.2542 --Evolution_days=30000 --Pre_evolution_days=20500 --time_interval=100 --simulation_times=100 --Divergency_mutations=450 --Divergency_sampling_times=100 --output_evo_seq_file=0 --KaKS=0.05
   
   Input:
   evolving_sequence: The target sequence to be evolving. Any sequence is suitable. 

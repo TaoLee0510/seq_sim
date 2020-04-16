@@ -19,7 +19,7 @@ example:
   Note: 1, In order to make the program run easily, all Base and amino acids names should convert into digital. Here we stipulate the A=1, T=2, G=3, C=4, others (including gaps)=0. the amino acids could convert any int type digital as you like.
         2, The evolving_sequence reference_sequence should be aligned before inputting to the program.
         3, The formate of evolving_sequence and reference_sequence is a txt formate file with space character is used as the column delimiter.
-        4, The codon_file is a 62*4 (row*column) file (codon.txt). The substitution_file is a 12*4 (row*column) file (substitution.txt). Users can generate these two files to suit their objects. if the dimension is not the same as the examples, one easy way is to fill the related rows with 0. OR recreated the dimension settings on related .hpp files.
+        4, The codon_file is a 62 x 4 (row x column) file (codon.txt). The substitution_file is a 12 x 4 (row x column) file (substitution.txt). Users can generate these two files to suit their objects. if the dimension is not the same as the examples, one easy way is to fill the related rows with 0. OR recreated the dimension settings on related .hpp files.
         
   
   seq_length: The sequence length of an aligned evolving_sequence.

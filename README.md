@@ -1,7 +1,7 @@
 # seq_sim
 in-silico evolutionary process to identify the confidence of phylogeny tree based on a specific out-group or out-groups. 
 Usage:
-./seq_sim --evolving_sequence=<path> --reference_sequence=<path> --codon_file=<path> --substitution_file=<path> --seq_length=<int> --mutation_rate=<double> --Evolution_days=<int> --Pre_evolution_days=<int> --time_interval=<int> --simulation_times=<int> --Divergency_mutations=<int> --Divergency_sampling_times=<int> --KaKS=<double>
+./seq_sim --evolving_sequence=path --reference_sequence=path --codon_file=path --substitution_file=path --seq_length=int --mutation_rate=double --Evolution_days=int --Pre_evolution_days=int --time_interval=int --simulation_times=int --Divergency_mutations=int --Divergency_sampling_times=int --KaKS=double
   
   Input:
   evolving_sequence: The target sequence to be evolving. Any sequence is suitable. 

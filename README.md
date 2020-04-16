@@ -49,15 +49,23 @@ example:
   Output:
   The program output .txt files:
   1, Parameters.txt: list the input parameters to run the program.
+  
   2, similarity_ref_evo.txt: The divergency between ref and evo sequences. [colunms: filelables; over_all_divergency; synonymous_site_divergency; non-synonymous_site_divergency].
+  
   3, Similarity_(n).txt: The divergency between N1 and N2 of nth simulation. [colunms: days(value x time_interval); over_all_divergency; synonymous_site_divergency; non-synonymous_site_divergency].
+  
   4, Similarity_divergency_(n).txt: The divergency between N3 and N4 of nth simulation. [colunms: days(value x time_interval); over_all_divergency; synonymous_site_divergency; non-synonymous_site_divergency].
+  
   5, results_single_out_(n).txt: Results of N1 as outgroup. [colunms: over_all_correct_number; over_all_error_number; over_all_error_rate; synonymous site_correct_number; synonymous site_error_number; synonymous site_error_rate; non-synonymous_correct_number; non-synonymous_error_number; non-synonymous site_error_rate; uncertainty_number; uncertainty_rate].
+  
   6, results_double_out_(n).txt: Results of N1 and N6 as outgroups. [colunms: over_all_correct_number; over_all_error_number; over_all_error_rate; synonymous site_correct_number; synonymous site_error_number; synonymous site_error_rate; non-synonymous_correct_number; non-synonymous_error_number; non-synonymous site_error_rate; uncertainty_number; uncertainty_rate].
   
   If the output_evo_seq_file=1, the following files would be outputed.
+  
   7, Seq_evo_(n).txt: N2; each row represnts days(value x time_interval); n: nth simulation.
+  
   8, Seq_evo1_(n).txt:N1; each row represnts days(value x time_interval); n: nth simulation.
+  
   9, Seq_evo2_(n).txt:N6; each row represnts days(value x time_interval); n: nth simulation.
   
   

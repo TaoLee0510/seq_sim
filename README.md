@@ -38,7 +38,7 @@ example:
   
   Divergency_sampling_times: The resampling time of the polymorphic sequences.
   
-  output_evo_seq_file: A int type parameter to control the output files whether include the evolved sequences. O: DO NOT output. 1: output.
+  output_evo_seq_file: A int type parameter to control the output files whether include the evolved sequences. 0: DO NOT output. 1: output.
   
   KaKS: The Value of Ka/Ks.
   

@@ -45,7 +45,7 @@ example:
     
   Note:
   
-  1, In order to make the program run easily, all Base and amino acids names should convert into digital. Here we stipulate the A=1, T=2, G=3, C=4, others (including gaps)=0. the amino acids could convert any int type digital as you like.
+  1, In order to make the program run easily, all Base and amino acids names should convert into digital. Here we stipulate the A=1, T=2, G=3, C=4, others (including gaps)=0. the amino acids could convert into any int type digital as you like.
   
   2, The evolving_sequence reference_sequence should be aligned before inputting to the program.
   

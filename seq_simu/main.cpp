@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  seq_simu Ver. 5.01
+//  seq_simu Ver. 5.0
 //
 //  Created by Taolee on 3/29/20.
 //  Copyright © 2020 Taolee. All rights reserved.
@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
             case 'F':
                 output_evo_seq_file = atoi(optarg);
                 break;
-                case 'K':
+            case 'K':
                 KaKS = atof(optarg);
                 break;
         }

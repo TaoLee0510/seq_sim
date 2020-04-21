@@ -13,10 +13,7 @@
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
 #include <ctime>
-#include <blitz/blitz.h>
-#include <blitz/array.h>
-using namespace blitz;
-Array<float,2> random_uniform (int N0)
+double * random_uniform (int N0)
 {
     const gsl_rng_type *T1;
     gsl_rng *r1;
@@ -24,13 +21,14 @@ Array<float,2> random_uniform (int N0)
     T1 = gsl_rng_ranlxs0;
     gsl_rng_default_seed = ((unsigned long)(time(NULL)));
     r1 = gsl_rng_alloc(T1);
-    Array<float,2> A(N0,1,FortranArray<2>());
-    for(int x=1;x<=N0;x++)
+    double *A = new double[N0];
+    for(int x=0;x<N0;x++)
     {
-        A(x,1) = gsl_rng_uniform(r1);
+        A[x] = gsl_rng_uniform(r1);
     }
     return A;
     gsl_rng_free(r1);
+    delete[] A;
+    A = NULL;
 }
-
 #endif /* random_uniform_hpp */

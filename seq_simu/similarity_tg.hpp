@@ -2,7 +2,7 @@
 //  similarity_tg.hpp
 //  seq_simu
 //
-//  Created by Taolee on 3/29/20.
+//  Created by Taolee on 4/13/20.
 //  Copyright © 2020 Taolee. All rights reserved.
 //
 
@@ -28,13 +28,14 @@
 #include <math.h>
 using namespace std;
 using namespace blitz;
+
 void similarity_tg(Array<int, 2> codon, Array<int, 2> seq_orig_sar,Array<int, 2> seq_orig_tg,Array<double, 2> &Similarity_tg,int seq_length,int times)
 {
     int NS_similarity=0;
     int S_similarity=0;
     for (int i=1;i<=seq_length;i++)
     {
-        if (seq_orig_sar(i,1)!=seq_orig_tg(i,1))
+        if (seq_orig_sar(1,i)!=seq_orig_tg(1,i))
         {
             if (i%3==0)
             {
@@ -62,4 +63,5 @@ void similarity_tg(Array<int, 2> codon, Array<int, 2> seq_orig_sar,Array<int, 2>
     Similarity_tg(times,3)=S_similarity/S_site_number;
     Similarity_tg(times,4)=NS_similarity/NS_site_number;
 }
+
 #endif /* similarity_tg_hpp */

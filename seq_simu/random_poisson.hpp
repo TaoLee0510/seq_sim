@@ -15,6 +15,7 @@
 #include <ctime>
 #include <blitz/blitz.h>
 #include <blitz/array.h>
+
 using namespace blitz;
 Array<int,2> random_poisson(int N0, double probability_of_mutation)
 {
@@ -24,10 +25,10 @@ Array<int,2> random_poisson(int N0, double probability_of_mutation)
     T = gsl_rng_ranlxs0;
     gsl_rng_default_seed = ((unsigned long)(time(NULL)));
     r = gsl_rng_alloc(T);
-    Array<int,2> A(N0,1,FortranArray<2>());
+    Array<int,2> A(1,N0,FortranArray<2>());
     for(int x=1;x<=N0;x++)
     {
-        A(x,1) = gsl_ran_poisson(r, probability_of_mutation);
+        A(1,x) = gsl_ran_poisson(r, probability_of_mutation);
     }
     return A;
     gsl_rng_free(r);

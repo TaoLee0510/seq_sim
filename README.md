@@ -6,11 +6,11 @@ Need help? Contact me via e-mail: aeolia.zafiro@gmail.com
 
 Usage:
 
-./seq_sim --evolving_sequence=path --reference_sequence=path --codon_file=path --substitution_file=path --seq_length=int --mutation_rate=double --Evolution_days=int --Pre_evolution_days=int --time_interval=int --simulation_times=int --Divergency_mutations=int --Divergency_sampling_times=int --output_evo_seq_file=int --KaKS=double
+./seq_sim --evolving_sequence=path --reference_sequence=path --codon_file=path --substitution_file=path --seq_length=int --mutation_rate=double --Evolution_days=int --Pre_evolution_days=int --time_interval=int --simulation_times=int --Divergence=double --Divergency_sampling_times=int --output_evo_seq_file=int --KaKS=double
 
 example:
 
-./seq_simu --evolving_sequence=./Sars_cov_2_orig.txt --reference_sequence=./TG13_orig.txt --codon_file=./codon.txt --substitution_file=./substitution.txt --seq_length=29274 --mutation_rate=0.2542 --Evolution_days=30000 --Pre_evolution_days=20500 --time_interval=100 --simulation_times=100 --Divergency_mutations=450 --Divergency_sampling_times=100 --output_evo_seq_file=0 --KaKS=0.05
+./seq_simu --evolving_sequence=./Sars_cov_2_orig.txt --reference_sequence=./TG13_orig.txt --codon_file=./codon.txt --substitution_file=./substitution.txt --seq_length=29274 --mutation_rate=0.2542 --Evolution_days=30000 --Pre_evolution_days=27000 --time_interval=100 --simulation_times=200 --Divergence=0.001 --Divergency_sampling_times=1000 --output_evo_seq_file=0 --KaKS=0.05
   
   Input:
   
@@ -32,9 +32,9 @@ example:
   
   time_interval: This parameter sets the time interval to record the evolved sequence. Meanwhile, at the recording time, the program calculated confidence.
   
-  simulation_times: The times of the simulations you wanna run.(100 is enough) 
+  simulation_times: The times of the simulations you wanna run.
   
-  Divergency_mutations: This parameter controls the polymorphic level of two sequences which are used to calculate the phylogenic confidence. The value is based on the Ka/Ks.
+  Divergence: This parameter controls the polymorphic level of two sequences which are used to calculate the phylogenic confidence.
   
   Divergency_sampling_times: The resampling time of the polymorphic sequences.
   

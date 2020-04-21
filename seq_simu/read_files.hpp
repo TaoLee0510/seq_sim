@@ -27,7 +27,7 @@ void read_file(Array<int, 2> &seq_orig_sar,Array<int, 2> &seq_orig_tg,Array<int,
     }
     for (int i=0; i<seq_length;i++)
     {
-        seq_orig_sar(1,i+1)=array[i];
+        seq_orig_sar(i+1,1)=array[i];
     }
     infile.close();
 
@@ -42,7 +42,7 @@ void read_file(Array<int, 2> &seq_orig_sar,Array<int, 2> &seq_orig_tg,Array<int,
     }
     for (int i=0; i<seq_length;i++)
     {
-        seq_orig_tg(1,i+1)=array1[i];
+        seq_orig_tg(i+1,1)=array1[i];
     }
     infile1.close();
 
@@ -60,11 +60,11 @@ void read_file(Array<int, 2> &seq_orig_sar,Array<int, 2> &seq_orig_tg,Array<int,
     {
         for (int j=0;j<4;j++)
         {
-            codon(i+1,j+1)=syno[i][j];
+            codon(j+1,i+1)=syno[i][j];
         }
     }
     infile11.close();
-    
+
     double site_freq[12][4]={0};
     ifstream infile21;
     infile21.open(substitution_file);
@@ -78,7 +78,7 @@ void read_file(Array<int, 2> &seq_orig_sar,Array<int, 2> &seq_orig_tg,Array<int,
     {
         for (int j=0;j<4;j++)
         {
-            sitefreq(i+1,j+1)=site_freq[i][j];
+            sitefreq(j+1,i+1)=site_freq[i][j];
         }
     }
     infile21.close();

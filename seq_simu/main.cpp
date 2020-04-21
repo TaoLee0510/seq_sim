@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  seq_simu Ver. 5.0
+//  seq_simu Ver. 5.02
 //
 //  Created by Taolee on 3/29/20.
 //  Copyright © 2020 Taolee. All rights reserved.
@@ -36,7 +36,7 @@ static const struct option long_options[] = {
     {"Pre_evolution_days", required_argument, NULL, 'd'},
     {"time_interval", required_argument, NULL, 'i'},
     {"simulation_times", required_argument, NULL, 'T'},
-    {"Divergency_mutations", required_argument, NULL, 'v'},
+    {"Divergence", required_argument, NULL, 'v'},
     {"Divergency_sampling_times", required_argument, NULL, 's'},
     {"output_evo_seq_file", required_argument, NULL, 'F'},
     {"KaKS", required_argument, NULL, 'K'},
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
     int Pre_evolution_days = 0;
     int time_interval = 0;
     int simulation_times = 0;
-    int Divergency_mutations = 0;
+    double Divergence = 0;
     int Divergency_sampling_times =0;
     int output_evo_seq_file=0;//0 no; 1 yes;
     double KaKS=0;
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
     while( (opt = getopt_long(argc, argv, short_options, long_options, NULL)) != -1){
         switch (opt){
             case '?':
-                fprintf(stdout, "Usage: %s --evolving_sequence=<path> --reference_sequence=<path> --codon_file=<path> --substitution_file=<path> --seq_length=<int> --mutation_rate=<double> --Evolution_days=<int> --Pre_evolution_days=<int> --time_interval=<int> --simulation_times=<int> --Divergency_mutations=<int> --Divergency_sampling_times=<int>", argv[0]);
+                fprintf(stdout, "Usage: %s --evolving_sequence=<path> --reference_sequence=<path> --codon_file=<path> --substitution_file=<path> --seq_length=<int> --mutation_rate=<double> --Evolution_days=<int> --Pre_evolution_days=<int> --time_interval=<int> --simulation_times=<int> --Divergence=<int> --Divergency_sampling_times=<int>", argv[0]);
                 return 0;
             case 'E':
                 evolving_sequence = optarg;
@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
                 simulation_times = atoi(optarg);
                 break;
             case 'v':
-                Divergency_mutations = atoi(optarg);
+                Divergence = atof(optarg);
                 break;
             case 's':
                 Divergency_sampling_times = atoi(optarg);
@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
     int interval=time_interval;
     int times=simulation_times;
     int D=DDAAYY/interval;
-    int random_mutation_number=Divergency_mutations;
+    int random_mutation_number=int(Divergence*seq_length*4.5/(KaKS*3.5+1));
     //////////////////////////////////////////////////////////////////////////output parameters/////////////////////////////////////////////////////
     char filedir [100] = {'\0'};
     sprintf(filedir, "./Parameters.txt");
@@ -130,7 +130,7 @@ int main(int argc, char *argv[]) {
     fprintf(fid1, "%s %s %d\n" ,"Preevolution days", "=", Pre_evolution_days);
     fprintf(fid1, "%s %s %d\n" ,"Time interval", "=", time_interval);
     fprintf(fid1, "%s %s %d\n" ,"simulation Times", "=", simulation_times);
-    fprintf(fid1, "%s %s %d\n" ,"Divergency mutations", "=", Divergency_mutations);
+    fprintf(fid1, "%s %s %lf\n" ,"Divergence", "=", Divergence);
     fprintf(fid1, "%s %s %d\n" ,"Divergency sampling times", "=", Divergency_sampling_times);
     fprintf(fid1, "%s %s %d\n" ,"Output evo_seq file", "=", output_evo_seq_file);
     fprintf(fid1, "%s %s %lf\n" ,"Ka:KS", "=", KaKS);

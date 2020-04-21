@@ -2,7 +2,7 @@
 //  save_file_3.hpp
 //  seq_simu
 //
-//  Created by Taolee on 4/13/20.
+//  Created by Taolee on 3/29/20.
 //  Copyright © 2020 Taolee. All rights reserved.
 //
 
@@ -13,7 +13,6 @@
 #include <blitz/blitz.h>
 #include <blitz/array.h>
 #include <cmath>
-
 using namespace blitz;
 void save_file_3 (Array<double,2> results0)
 {
@@ -34,5 +33,4 @@ void save_file_3 (Array<double,2> results0)
         }
         fclose(fid31);
 }
-
 #endif /* save_file_3_hpp */

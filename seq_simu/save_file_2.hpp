@@ -2,7 +2,7 @@
 //  save_file_2.hpp
 //  seq_simu
 //
-//  Created by Taolee on 4/3/20.
+//  Created by Taolee on 3/29/20.
 //  Copyright © 2020 Taolee. All rights reserved.
 //
 
@@ -27,17 +27,15 @@ void save_file_2 (Array<double,3> results0,Array<double,3> results1,Array<double
         {
             if(co<11)
             {
-                fprintf(fid31,"%f\t",results0(i,co,j));
+                fprintf(fid31,"%f\t",results0(co,i,j));
             }
             else
             {
-                fprintf(fid31,"%f\n",results0(i,co,j));
+                fprintf(fid31,"%f\n",results0(co,i,j));
             }
         }
     }
     fclose(fid31);
-    
-    
     char filedir5 [100] = {'\0'};
     sprintf(filedir5, "./results_double_out_%.1d.txt",j);
     FILE * fid5;
@@ -48,17 +46,15 @@ void save_file_2 (Array<double,3> results0,Array<double,3> results1,Array<double
         {
             if(co<11)
             {
-                fprintf(fid5,"%f\t",results1(i,co,j));
+                fprintf(fid5,"%f\t",results1(co,i,j));
             }
             else
             {
-                fprintf(fid5,"%f\n",results1(i,co,j));
+                fprintf(fid5,"%f\n",results1(co,i,j));
             }
         }
     }
     fclose(fid5);
-    
-    
     char filedir51 [100] = {'\0'};
     sprintf(filedir51, "./Similarity_%.1d.txt",j);
     FILE * fid51;
@@ -69,16 +65,15 @@ void save_file_2 (Array<double,3> results0,Array<double,3> results1,Array<double
         {
             if(co<4)
             {
-                fprintf(fid51,"%f\t",results2(i,co,j));
+                fprintf(fid51,"%f\t",results2(co,i,j));
             }
             else
             {
-                fprintf(fid51,"%f\n",results2(i,co,j));
+                fprintf(fid51,"%f\n",results2(co,i,j));
             }
         }
     }
     fclose(fid51);
-    
     char filedir52 [100] = {'\0'};
     sprintf(filedir52, "./Similarity_divergency_%.1d.txt",j);
     FILE * fid52;
@@ -89,11 +84,11 @@ void save_file_2 (Array<double,3> results0,Array<double,3> results1,Array<double
         {
             if(co<4)
             {
-                fprintf(fid52,"%f\t",results3(i,co,j));
+                fprintf(fid52,"%f\t",results3(co,i,j));
             }
             else
             {
-                fprintf(fid52,"%f\n",results3(i,co,j));
+                fprintf(fid52,"%f\n",results3(co,i,j));
             }
         }
     }

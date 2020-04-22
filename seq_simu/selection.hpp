@@ -19,7 +19,7 @@
 //#include "random_uniform.hpp"
 using namespace std;
 using namespace blitz;
-void selection(int m_number,Array<int, 2> seq,Array<int,2> &mutation_temp,Array<int, 2> codon,double selections)
+void selection(int m_number,Array<int, 2> seq,Array<int,2> &mutation_temp,Array<int, 2> codon,double selections, int &mutation_real_s, int &mutation_real_ns)
 {
     Range all = Range::all();
     std::mt19937 rng;
@@ -61,6 +61,10 @@ void selection(int m_number,Array<int, 2> seq,Array<int,2> &mutation_temp,Array<
                     mutation_temp(i,all)=0;
                 }
             }
+            else
+            {
+                mutation_real_s=mutation_real_s+1;
+            }
         }
         else
         {
@@ -68,6 +72,7 @@ void selection(int m_number,Array<int, 2> seq,Array<int,2> &mutation_temp,Array<
             {
                 mutation_temp(i,all)=0;
             }
+            mutation_real_ns=mutation_real_ns+1;
         }
     }
 }

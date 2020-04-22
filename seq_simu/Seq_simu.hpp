@@ -82,14 +82,19 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar,int DDAAYY,int
     All_out=0;
     Array<double, 3> Similarity(4,D,times,FortranArray<3>());
     Similarity=0;
+    Array<double, 3> Similarity1(4,D,times,FortranArray<3>());
+    Similarity1=0;
     Array<double, 2> Similarity_tg(1,4,FortranArray<2>());
     Similarity_tg=0;
     Array<double, 3> Similarity_divergency(4,D,times,FortranArray<3>());
     Similarity_divergency=0;
+    Array<double, 3> Similarity_divergency1(4,D,times,FortranArray<3>());
+    Similarity_divergency1=0;
+    Array<double, 2> mutatioin_number(times,10,times,FortranArray<2>());
+    mutatioin_number=0;
     //////////////////////////////////////////////////// read file /////////////////////////////////////////////
     read_file(seq_orig_sar, seq_orig_tg,codon, sitefreq,seq_length, evolving_sequence, reference_sequence, codon_file, substitution_file);
     similarity_tg(codon, seq_orig_sar, seq_orig_tg, Similarity_tg, seq_length,1);
-    save_file_3(Similarity_tg);
     //////////////////////////////////////////////////// mutation location stastics /////////////////////////////////////////////
     int m_loci_sar=0;
     for (int i=1;i<=seq_length;i++)
@@ -126,9 +131,11 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar,int DDAAYY,int
         int *mutation_number_sar0=new int[DAY_pa];
         mutation_number_sar0=random_poisson(DAY_pa, probability_of_mutation_sar);  
         int day=1;
+        int mutation_real_s=0;
+        int mutation_real_ns=0;
         for (day=1;day<=DAY_pa;day++)
         {
-            pre_evolution(sitefreq, codon, seq_orig_sar, seq_sar2, mutation_number_sar0, m_loci_sar, mutation_location_sar, seq_length, day,duplic,selections);
+            pre_evolution(sitefreq, codon, seq_orig_sar, seq_sar2, mutation_number_sar0, m_loci_sar, mutation_location_sar, seq_length, day,duplic,selections, mutation_real_s, mutation_real_ns);
         }
         seq_evo_sar2(all,1)=seq_sar2(all,1);
         //////////////////////////////////////////////////// mutation number initiation /////////////////////////////////////////////
@@ -140,9 +147,14 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar,int DDAAYY,int
         mutation_number_sar2=random_poisson(DDAAYY, probability_of_mutation_sar);
         //////////////////////////////////////////////////// evolution /////////////////////////////////////////////
         day=1;
+        int total_mutation=0;
+        int mutation_real=0;
+        mutation_real_s=0;
+        mutation_real_ns=0;
         for (day=1;day<=DDAAYY;day++)
         {
-            evolution (sitefreq, codon, seq_orig_sar, seq_sar, seq_sar1, seq_sar2, seq_evo_sar, seq_evo_sar1, seq_evo_sar2, mutation_number_sar, mutation_number_sar1, mutation_number_sar2, m_loci_sar, mutation_location_sar, seq_length, interval, day, duplic, selections);
+            evolution (sitefreq, codon, seq_orig_sar, seq_sar, seq_sar1, seq_sar2, seq_evo_sar, seq_evo_sar1, seq_evo_sar2, mutation_number_sar, mutation_number_sar1, mutation_number_sar2, m_loci_sar, mutation_location_sar, seq_length, interval, day, duplic, selections, mutation_real, mutation_real_s, mutation_real_ns);
+            total_mutation=total_mutation+mutation_number_sar[day-1];
         }
         if (output_evo_seq_file==1)
         {
@@ -160,13 +172,23 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar,int DDAAYY,int
                 //////////////////////////////////////////////////// random mutation  /////////////////////////////////////////////
                 random_mutation(sitefreq, codon, seq_rand_sar, m_loci_sar,mutation_location_sar, seq_length, j, random_mutation_number,duplic,rand_times,selections);
                 //////////////////////////////////////////////////// confidence  /////////////////////////////////////////////
-                confidence_calculation(codon, seq_orig_sar, seq_evo_sar, seq_evo_sar1, seq_evo_sar2, seq_rand_sar, SA_out_temp, All_out_temp, Similarity_divergency, Similarity, j, rand_times, seq_length, duplic, NS_site_number, S_site_number);
+                confidence_calculation(codon, seq_orig_sar, seq_evo_sar, seq_evo_sar1, seq_evo_sar2, seq_rand_sar, SA_out_temp, All_out_temp, Similarity_divergency,Similarity_divergency1, Similarity,Similarity1, j, rand_times, seq_length, duplic, NS_site_number, S_site_number);
             }
             j=2;
             cout <<"Runing times: "<<duplic<<"     Confidence run times:    "<< rand_times << endl;
         }
         extral_results(SA_out_temp, All_out_temp, SA_out, All_out, D, duplic);
-        save_file_2(SA_out,All_out,Similarity,Similarity_divergency,D,duplic);
+        save_file_2(SA_out,All_out,Similarity,Similarity_divergency,Similarity_divergency1,Similarity1, D,duplic);
+        mutatioin_number(duplic,1)=total_mutation;
+        mutatioin_number(duplic,2)=mutation_real;
+        mutatioin_number(duplic,3)=mutation_real/4.5;
+        mutatioin_number(duplic,4)=(mutation_real/4.5)*0.175;
+        mutatioin_number(duplic,5)=mutation_real;
+        mutatioin_number(duplic,6)=mutation_real_s;
+        mutatioin_number(duplic,7)=mutation_real_ns;
+        mutatioin_number(duplic,8)=Similarity1(2,D,duplic)*seq_length;
+        mutatioin_number(duplic,9)=Similarity1(3,D,duplic)*S_site_number;
+        mutatioin_number(duplic,10)=Similarity1(4,D,duplic)*NS_site_number;
         delete[] mutation_number_sar0;
         mutation_number_sar0 = NULL;
         delete[] mutation_number_sar;
@@ -176,8 +198,8 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar,int DDAAYY,int
         delete[] mutation_number_sar2;
         mutation_number_sar2 = NULL;
     }
+    save_file_3(Similarity_tg, mutatioin_number, times);
     delete[] mutation_location_sar;
     mutation_location_sar = NULL;
-    
 }
 #endif /* Seq_simu_hpp */

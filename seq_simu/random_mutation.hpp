@@ -33,6 +33,8 @@ using namespace std;
 using namespace blitz;
 void random_mutation (Array<double, 2> sitefreq, Array<int, 2> codon,Array<int, 2> &seq_rand_sar,int m_loci_sar,int *mutation_location_sar,int seq_length,int j,int random_mutation_number,int duplic,int rand_times,double selections)
 {
+    int temp1=0;
+    int temp2=0;
     Range all = Range::all();
     Array<int,2> seq_sar(seq_length,1,FortranArray<2>());
     seq_sar=0;
@@ -42,7 +44,7 @@ void random_mutation (Array<double, 2> sitefreq, Array<int, 2> codon,Array<int, 
     Array<int,2> mutation_temp(random_mutation_number,2,FortranArray<2>());
     mutation_temp=0;
     mutation(random_mutation_number, seq_sar, mutation_site, mutation_temp, sitefreq,seq_length,mutation_location_sar,m_loci_sar);//mutation
-    selection(random_mutation_number, seq_sar, mutation_temp,codon,selections);//selection
+    selection(random_mutation_number, seq_sar, mutation_temp,codon,selections, temp1, temp2);//selection
     for (int i=1; i<=random_mutation_number;i++)
     {
         if (mutation_temp(i,1)>0)

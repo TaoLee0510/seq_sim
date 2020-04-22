@@ -15,7 +15,7 @@
 #include <cmath>
 
 using namespace blitz;
-void save_file_2 (Array<double,3> results0,Array<double,3> results1,Array<double,3> results2,Array<double,3> results3,int D, int j)
+void save_file_2 (Array<double,3> results0,Array<double,3> results1,Array<double,3> results2,Array<double,3> results3,Array<double,3> results4,Array<double,3> results5, int D, int j)
 {
     char filedir31 [100] = {'\0'};
     sprintf(filedir31, "./results_single_out_%.1d.txt",j);
@@ -93,5 +93,43 @@ void save_file_2 (Array<double,3> results0,Array<double,3> results1,Array<double
         }
     }
     fclose(fid52);
+    char filedir55 [100] = {'\0'};
+    sprintf(filedir55, "./Similarity2_%.1d.txt",j);
+    FILE * fid55;
+    fid55=fopen (filedir55,"w+");
+    for(int i=1;i<=D;i++)
+    {
+        for(int co=1;co<=4;co++)
+        {
+            if(co<4)
+            {
+                fprintf(fid55,"%f\t",results4(co,i,j));
+            }
+            else
+            {
+                fprintf(fid55,"%f\n",results4(co,i,j));
+            }
+        }
+    }
+    fclose(fid55);
+    char filedir50 [100] = {'\0'};
+    sprintf(filedir50, "./Similarity_evo_%.1d.txt",j);
+    FILE * fid50;
+    fid50=fopen (filedir50,"w+");
+    for(int i=1;i<=D;i++)
+    {
+        for(int co=1;co<=4;co++)
+        {
+            if(co<4)
+            {
+                fprintf(fid50,"%f\t",results5(co,i,j));
+            }
+            else
+            {
+                fprintf(fid50,"%f\n",results5(co,i,j));
+            }
+        }
+    }
+    fclose(fid50);
 }
 #endif /* save_file_2_hpp */

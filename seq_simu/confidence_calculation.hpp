@@ -29,7 +29,7 @@
 
 using namespace std;
 using namespace blitz;
-void confidence_calculation (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> seq_evo_sar,Array<int, 2> seq_evo_sar1,Array<int, 2> seq_evo_sar2, Array<int, 2> seq_rand_sar,Array<double, 3> &SA_out_temp, Array<double, 3> &All_out_temp ,Array<double, 3> &Similarity_divergency,Array<double, 3> &Similarity,int j, int rand_times, int seq_length,int duplic, double NS_site_number, double S_site_number)
+void confidence_calculation (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> seq_evo_sar,Array<int, 2> seq_evo_sar1,Array<int, 2> seq_evo_sar2, Array<int, 2> seq_rand_sar,Array<double, 3> &SA_out_temp, Array<double, 3> &All_out_temp ,Array<double, 3> &Similarity_divergency,Array<double, 3> &Similarity_divergency1, Array<double, 3> &Similarity,Array<double, 3> &Similarity1, int j, int rand_times, int seq_length,int duplic, double NS_site_number, double S_site_number)
 {
     if (rand_times==1)
     {
@@ -49,6 +49,10 @@ void confidence_calculation (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Ar
         int S_similarity=0;
         int NS_similarity1=0;
         int S_similarity1=0;
+        int NS_similarity2=0;
+        int S_similarity2=0;
+        int NS_similarity3=0;
+        int S_similarity3=0;
         for (int i=1;i<=seq_length;i++)
         {
             if (seq_rand_sar(i,j)!=seq_evo_sar(i,j))
@@ -127,6 +131,28 @@ void confidence_calculation (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Ar
                     NS_similarity=NS_similarity+1;
                 }
             }
+            if (seq_evo_sar2(i,j)!=seq_evo_sar(i,j))
+            {
+                if (i%3==0)
+                {
+                    Array<int, 2> seqsar(seq_length,1,FortranArray<2>());//seq_rand
+                    seqsar=0;
+                    seqsar(all,1)=seq_evo_sar2(all,j);
+                    int s=NS_judge(i,seqsar,seq_evo_sar,codon,j);
+                    if (s==1)
+                    {
+                        S_similarity2=S_similarity2+1;
+                    }
+                    else
+                    {
+                        NS_similarity2=NS_similarity2+1;
+                    }
+                }
+                else
+                {
+                    NS_similarity2=NS_similarity2+1;
+                }
+            }
             if (seq_rand_sar(i,j)!=seq_evo_sar(i,j))
             {
                 if (i%3==0)
@@ -147,6 +173,25 @@ void confidence_calculation (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Ar
                 else
                 {
                     NS_similarity1=NS_similarity1+1;
+                }
+            }
+            if (seq_orig_sar(i,1)!=seq_evo_sar(i,j))
+            {
+                if (i%3==0)
+                {
+                    int s=NS_judge(i,seq_orig_sar,seq_evo_sar,codon,j);
+                    if (s==1)
+                    {
+                        S_similarity3=S_similarity3+1;
+                    }
+                    else
+                    {
+                        NS_similarity3=NS_similarity3+1;
+                    }
+                }
+                else
+                {
+                    NS_similarity3=NS_similarity3+1;
                 }
             }
         }
@@ -174,6 +219,16 @@ void confidence_calculation (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Ar
         Similarity_divergency(2,j-1,duplic)=sum6/seq_length;
         Similarity_divergency(3,j-1,duplic)=S_similarity1/S_site_number;
         Similarity_divergency(4,j-1,duplic)=NS_similarity1/NS_site_number;
+        Similarity_divergency1(1,j-1,duplic)=j;
+        double sum7=S_similarity2+NS_similarity2;
+        Similarity_divergency1(2,j-1,duplic)=sum7/seq_length;
+        Similarity_divergency1(3,j-1,duplic)=S_similarity2/S_site_number;
+        Similarity_divergency1(4,j-1,duplic)=NS_similarity2/NS_site_number;
+        Similarity1(1,j-1,duplic)=j;
+        double sum8=S_similarity3+NS_similarity3;
+        Similarity1(2,j-1,duplic)=sum8/seq_length;
+        Similarity1(3,j-1,duplic)=S_similarity3/S_site_number;
+        Similarity1(4,j-1,duplic)=NS_similarity3/NS_site_number;
     }
     else
     {

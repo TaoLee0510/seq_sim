@@ -98,7 +98,7 @@ void extral_results(Array<double, 3> SA_out_temp, Array<double, 3> All_out_temp,
             All_out(9,j,duplic)=All_out(8,j,duplic)/sum3;
         }
         All_out(10,j,duplic)=mean(All_out_temp(7,j,all));
-        sum4=All_out(10,j,duplic)+All_out(j,1,duplic)+All_out(2,j,duplic);
+        sum4=All_out(10,j,duplic)+All_out(1,j,duplic)+All_out(2,j,duplic);
         if (sum4==0)
         {
             All_out(11,j,duplic)=0;

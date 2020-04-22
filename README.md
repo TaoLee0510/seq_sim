@@ -10,7 +10,7 @@ Usage:
 
 example:
 
-./seq_simu --evolving_sequence=./Sars_cov_2_orig.txt --reference_sequence=./TG13_orig.txt --codon_file=./codon.txt --substitution_file=./substitution.txt --seq_length=29274 --mutation_rate=0.2542 --Evolution_days=30000 --Pre_evolution_days=27000 --time_interval=100 --simulation_times=200 --Divergence=0.001 --Divergency_sampling_times=1000 --output_evo_seq_file=0 --KaKS=0.05
+./seq_simu --evolving_sequence=./Sars_cov_2_orig.txt --reference_sequence=./TG13_orig.txt --codon_file=./codon.txt --substitution_file=./substitution.txt --seq_length=29274 --mutation_rate=0.2542 --Evolution_days=30000 --Pre_evolution_days=54000 --time_interval=100 --simulation_times=200 --Divergence=0.001 --Divergency_sampling_times=1000 --output_evo_seq_file=0 --KaKS=0.05
   
   Input:
   

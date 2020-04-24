@@ -59,6 +59,7 @@ void selection(int m_number,Array<int, 2> seq,Array<int,2> &mutation_temp,Array<
                 if (distribution(rng)>selections)
                 {
                     mutation_temp(i,all)=0;
+                    mutation_real_ns=mutation_real_ns+1;
                 }
             }
             else

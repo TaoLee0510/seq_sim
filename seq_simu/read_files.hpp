@@ -14,7 +14,7 @@
 #include <string>
 using namespace std;
 using namespace blitz;
-void read_file(Array<int, 2> &seq_orig_sar,Array<int, 2> &seq_orig_tg,Array<int, 2> &codon,Array<double, 2> &sitefreq,int seq_length, string evolving_sequence, string reference_sequence, string codon_file, string substitution_file)
+void read_file(Array<int, 2> &seq_orig_sar,Array<int, 2> &seq_orig_tg,Array<int, 2> &codon,Array<double, 2> &sitefreq,Array<double, 2> &sitefreq_out1, Array<double, 2> &sitefreq_out2, int seq_length, string evolving_sequence, string reference_sequence, string codon_file, string substitution_file, string substitution_file_outgroup1, string substitution_file_outgroup2)
 {
     int array[29274]={0};
     ifstream infile;
@@ -82,6 +82,44 @@ void read_file(Array<int, 2> &seq_orig_sar,Array<int, 2> &seq_orig_tg,Array<int,
         }
     }
     infile21.close();
+    
+    
+    double site_freq_out1[12][4]={0};
+       ifstream infile22;
+       infile22.open(substitution_file_outgroup1);
+       double* ptr22 = &site_freq_out1[0][0];
+       while(!infile22.eof())
+       {
+           infile22>>*ptr22;
+           ptr22++;
+       }
+       for (int i=0; i<12;i++)
+       {
+           for (int j=0;j<4;j++)
+           {
+               sitefreq_out1(j+1,i+1)=site_freq_out1[i][j];
+           }
+       }
+       infile22.close();
+    
+    
+     double site_freq_out2[12][4]={0};
+          ifstream infile23;
+          infile23.open(substitution_file_outgroup2);
+          double* ptr23 = &site_freq_out2[0][0];
+          while(!infile23.eof())
+          {
+              infile23>>*ptr23;
+              ptr23++;
+          }
+          for (int i=0; i<12;i++)
+          {
+              for (int j=0;j<4;j++)
+              {
+                  sitefreq_out2(j+1,i+1)=site_freq_out2[i][j];
+              }
+          }
+          infile23.close();
 }
 
 #endif /* read_files_hpp */

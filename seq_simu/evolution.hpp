@@ -30,7 +30,7 @@
 #include <math.h>
 using namespace std;
 using namespace blitz;
-void evolution (Array<double, 2> sitefreq, Array<int, 2> codon,Array<int, 2> seq_orig_sar,Array<int, 2> &seq_sar,Array<int, 2> &seq_sar1,Array<int, 2> &seq_sar2,Array<int, 2> &seq_evo_sar,Array<int, 2> &seq_evo_sar1,Array<int, 2> &seq_evo_sar2, int *mutation_number_sar, int *mutation_number_sar1, int *mutation_number_sar2, int m_loci_sar,  int *mutation_location_sar,int seq_length,int interval,int day,int duplic,double selections, int &mutation_real,int &mutation_real_s, int &mutation_real_ns)
+void evolution (Array<double, 2> sitefreq, Array<double, 2> sitefreq_out1, Array<double, 2> sitefreq_out2, Array<int, 2> codon,Array<int, 2> seq_orig_sar,Array<int, 2> &seq_sar,Array<int, 2> &seq_sar1,Array<int, 2> &seq_sar2,Array<int, 2> &seq_evo_sar,Array<int, 2> &seq_evo_sar1,Array<int, 2> &seq_evo_sar2, int *mutation_number_sar, int *mutation_number_sar1, int *mutation_number_sar2, int m_loci_sar,  int *mutation_location_sar,int seq_length,int interval,int day,int duplic,double selections, int &mutation_real,int &mutation_real_s, int &mutation_real_ns)
 {
     int temp1=0;
     int temp2=0;
@@ -42,8 +42,8 @@ void evolution (Array<double, 2> sitefreq, Array<int, 2> codon,Array<int, 2> seq
         mutation_site=0;
         Array<int,2> mutation_temp(m_number_sar,2,FortranArray<2>());
         mutation_temp=0;
-        mutation(m_number_sar, seq_sar, mutation_site, mutation_temp, sitefreq,seq_length,mutation_location_sar,m_loci_sar);//mutation
-        selection(m_number_sar, seq_sar, mutation_temp,codon,selections,mutation_real_s,mutation_real_ns);//selection
+        mutation(m_number_sar, seq_sar, mutation_site, mutation_temp, sitefreq,seq_length,mutation_location_sar,m_loci_sar);
+        selection(m_number_sar, seq_sar, mutation_temp,codon,selections,mutation_real_s,mutation_real_ns);
         for (int i=1; i<=m_number_sar;i++)
         {
             if (mutation_temp(i,1)>0)
@@ -60,8 +60,8 @@ void evolution (Array<double, 2> sitefreq, Array<int, 2> codon,Array<int, 2> seq
         mutation_site=0;
         Array<int,2> mutation_temp(m_number_sar1,2,FortranArray<2>());
         mutation_temp=0;
-        mutation(m_number_sar1, seq_sar1, mutation_site, mutation_temp, sitefreq,seq_length,mutation_location_sar,m_loci_sar);//mutation
-        selection(m_number_sar1, seq_sar1, mutation_temp,codon,selections, temp1, temp2);//selection
+        mutation(m_number_sar1, seq_sar1, mutation_site, mutation_temp, sitefreq_out1,seq_length,mutation_location_sar,m_loci_sar);
+        selection(m_number_sar1, seq_sar1, mutation_temp,codon,selections, temp1, temp2);
         for (int i=1; i<=m_number_sar1;i++)
         {
             if (mutation_temp(i,1)>0)
@@ -77,8 +77,8 @@ void evolution (Array<double, 2> sitefreq, Array<int, 2> codon,Array<int, 2> seq
         mutation_site=0;
         Array<int,2> mutation_temp(m_number_sar2,2,FortranArray<2>());
         mutation_temp=0;
-        mutation(m_number_sar2, seq_sar2, mutation_site, mutation_temp, sitefreq,seq_length,mutation_location_sar,m_loci_sar);//mutation
-        selection(m_number_sar2, seq_sar2, mutation_temp,codon,selections, temp1, temp2);//selection
+        mutation(m_number_sar2, seq_sar2, mutation_site, mutation_temp, sitefreq_out2,seq_length,mutation_location_sar,m_loci_sar);
+        selection(m_number_sar2, seq_sar2, mutation_temp,codon,selections, temp1, temp2);
         for (int i=1; i<=m_number_sar2;i++)
         {
             if (mutation_temp(i,1)>0)

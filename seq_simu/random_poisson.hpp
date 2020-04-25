@@ -13,21 +13,25 @@
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
 #include <ctime>
-#include <random>
-using namespace std;
-int * random_poisson(int N0, double probability_of_mutation)
+#include <blitz/blitz.h>
+#include <blitz/array.h>
+
+using namespace blitz;
+Array<int,2> random_poisson(int N0, double probability_of_mutation)
 {
-    std::mt19937 rng;
-    rng.seed(std::random_device()());
-    std::poisson_distribution<int> distribution(probability_of_mutation);
-    int *A =new int[N0];
-    for(int x=0;x<N0;x++)
+    const gsl_rng_type *T;
+    gsl_rng *r;
+    gsl_rng_env_setup();
+    T = gsl_rng_ranlxs0;
+    gsl_rng_default_seed = ((unsigned long)(time(NULL)));
+    r = gsl_rng_alloc(T);
+    Array<int,2> A(1,N0,FortranArray<2>());
+    for(int x=1;x<=N0;x++)
     {
-        A[x]=distribution(rng);
+        A(1,x) = gsl_ran_poisson(r, probability_of_mutation);
     }
     return A;
-    delete[] A;
-    A = NULL;
+    gsl_rng_free(r);
 }
 
 #endif /* random_poisson_hpp */

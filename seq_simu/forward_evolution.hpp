@@ -29,7 +29,7 @@
 #include "selection.hpp"
 #include <math.h>
 
-void forward_evolution (Array<double, 2> sitefreq, Array<double, 2> sitefreq_out1,Array<double, 2> sitefreq_out2,Array<int, 2> codon, Array<int, 2> &seq_rand_sar, Array<int, 2> &seq_rand_sar1, Array<int, 2> &seq_rand_sar0, Array<int, 2> &seq_rand_sar01, int *mutation_number_rand_sar0, int *mutation_number_rand_sar, int *mutation_number_rand_sar1, int *mutation_number_rand_sar01, int forward_evo_time, int seq_length, int j, int m_loci_sar, double selections,int *mutation_location_sar)
+void forward_evolution (Array<double, 2> sitefreq, Array<double, 2> sitefreq_out1,Array<double, 2> sitefreq_out2,Array<int, 2> codon, Array<int, 2> &seq_rand_sar, Array<int, 2> &seq_rand_sar1, Array<int, 2> &seq_rand_sar0, Array<int, 2> &seq_rand_sar01, int *mutation_number_rand_sar0, int *mutation_number_rand_sar, int *mutation_number_rand_sar1, int *mutation_number_rand_sar01, int forward_evo_time, int seq_length, int j, int m_loci_sar, double selections,int *mutation_location_sar, double n_selection)
 {
     Range all = Range::all();
     Array<int,2> seq_sar(seq_length,1,FortranArray<2>());
@@ -48,11 +48,11 @@ void forward_evolution (Array<double, 2> sitefreq, Array<double, 2> sitefreq_out
     seq_sar01=0;
     seq_sar01(all,1)=seq_rand_sar01(all,j);
     
+    int temp1=0;
+    int temp2=0;
+    
     for (int t3=1;t3<=forward_evo_time;t3++)
     {
-        int temp1=0;
-        int temp2=0;
-        
         int m_number_sar=mutation_number_rand_sar[t3-1];
         if (m_number_sar>0)
         {
@@ -60,8 +60,11 @@ void forward_evolution (Array<double, 2> sitefreq, Array<double, 2> sitefreq_out
             mutation_site=0;
             Array<int,2> mutation_temp(m_number_sar,2,FortranArray<2>());
             mutation_temp=0;
-            mutation(m_number_sar, seq_sar, mutation_site, mutation_temp, sitefreq,seq_length,mutation_location_sar,m_loci_sar);
-            selection(m_number_sar, seq_sar, mutation_temp,codon,selections,temp1,temp2);
+            mutation(m_number_sar, seq_sar, mutation_site, mutation_temp, sitefreq, seq_length,mutation_location_sar,m_loci_sar);
+            if (n_selection>0)
+            {
+            selection(m_number_sar, seq_sar, mutation_temp,codon,n_selection, temp1, temp2);
+            }
             for (int i=1; i<=m_number_sar;i++)
             {
                 if (mutation_temp(i,1)>0)
@@ -77,8 +80,11 @@ void forward_evolution (Array<double, 2> sitefreq, Array<double, 2> sitefreq_out
             mutation_site=0;
             Array<int,2> mutation_temp(m_number_sar1,2,FortranArray<2>());
             mutation_temp=0;
-            mutation(m_number_sar1, seq_sar1, mutation_site, mutation_temp, sitefreq,seq_length,mutation_location_sar,m_loci_sar);
-            selection(m_number_sar1, seq_sar1, mutation_temp,codon,selections, temp1, temp2);
+            mutation(m_number_sar1, seq_sar1, mutation_site, mutation_temp, sitefreq, seq_length,mutation_location_sar,m_loci_sar);
+            if (n_selection>0)
+            {
+            selection(m_number_sar1, seq_sar1, mutation_temp,codon,n_selection, temp1, temp2);
+            }
             for (int i=1; i<=m_number_sar1;i++)
             {
                 if (mutation_temp(i,1)>0)
@@ -95,7 +101,10 @@ void forward_evolution (Array<double, 2> sitefreq, Array<double, 2> sitefreq_out
             Array<int,2> mutation_temp(m_number_sar0,2,FortranArray<2>());
             mutation_temp=0;
             mutation(m_number_sar0, seq_sar0, mutation_site, mutation_temp, sitefreq_out1,seq_length,mutation_location_sar,m_loci_sar);
-            selection(m_number_sar0, seq_sar0, mutation_temp,codon,selections, temp1, temp2);
+            if (n_selection>0)
+            {
+            selection(m_number_sar0, seq_sar0, mutation_temp,codon,n_selection, temp1, temp2);
+            }
             for (int i=1; i<=m_number_sar0;i++)
             {
                 if (mutation_temp(i,1)>0)
@@ -112,7 +121,10 @@ void forward_evolution (Array<double, 2> sitefreq, Array<double, 2> sitefreq_out
             Array<int,2> mutation_temp(m_number_sar01,2,FortranArray<2>());
             mutation_temp=0;
             mutation(m_number_sar01, seq_sar01, mutation_site, mutation_temp, sitefreq_out2,seq_length,mutation_location_sar,m_loci_sar);
-            selection(m_number_sar01, seq_sar01, mutation_temp,codon,selections, temp1, temp2);
+            if (n_selection>0)
+            {
+            selection(m_number_sar01, seq_sar01, mutation_temp,codon,n_selection, temp1, temp2);
+            }
             for (int i=1; i<=m_number_sar01;i++)
             {
                 if (mutation_temp(i,1)>0)

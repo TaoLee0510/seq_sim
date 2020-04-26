@@ -2,7 +2,7 @@
 //  save_file_3.hpp
 //  seq_simu
 //
-//  Created by Taolee on 4/13/20.
+//  Created by Taolee on 3/29/20.
 //  Copyright © 2020 Taolee. All rights reserved.
 //
 
@@ -13,26 +13,44 @@
 #include <blitz/blitz.h>
 #include <blitz/array.h>
 #include <cmath>
-
 using namespace blitz;
-void save_file_3 (Array<double,2> results0)
+void save_file_3 (Array<double,2> results0, Array<double,2> results1,int times)
 {
-        char filedir31 [100] = {'\0'};
-        sprintf(filedir31, "./similarity_ref_evo.txt");
-        FILE * fid31;
-        fid31=fopen (filedir31,"w+");
-        for(int co=1;co<=4;co++)
+    char filedir31 [100] = {'\0'};
+    sprintf(filedir31, "./similarity_ref_evo.txt");
+    FILE * fid31;
+    fid31=fopen (filedir31,"w+");
+    for(int co=1;co<=4;co++)
+    {
+        if(co<4)
         {
-            if(co<4)
+            fprintf(fid31,"%f\t",results0(1,co));
+        }
+        else
+        {
+            fprintf(fid31,"%f\n",results0(1,co));
+        }
+    }
+    fclose(fid31);
+    
+    char filedir3 [100] = {'\0'};
+    sprintf(filedir3, "./mutation.txt");
+    FILE * fid3;
+    fid3=fopen (filedir3,"w+");
+    for (int ro=1;ro<=times;ro++)
+    {
+        for(int co=1;co<=10;co++)
+        {
+            if(co<10)
             {
-                fprintf(fid31,"%f\t",results0(1,co));
+                fprintf(fid3,"%f\t",results1(ro,co));
             }
             else
             {
-                fprintf(fid31,"%f\n",results0(1,co));
+                fprintf(fid3,"%f\n",results1(ro,co));
             }
         }
-        fclose(fid31);
+    }
+    fclose(fid3);
 }
-
 #endif /* save_file_3_hpp */

@@ -56,6 +56,8 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
         int S_similarity11=0;
         int NS_similarity3=0;
         int S_similarity3=0;
+        int S_uncertainty=0;
+        int S_uncertainty_all=0;
         for (int i=1;i<=seq_length;i++)
         {
             int temp=0;
@@ -130,9 +132,13 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
                         {
                             N_right_SA_out_S=N_right_SA_out_S+1;
                         }
-                        else if (temp!=seq_evo_sar(i,j))
+                        if (temp!=seq_evo_sar(i,j))
                         {
                             N_err_SA_out_S=N_err_SA_out_S+1;
+                        }
+                        if (seq_rand_sar0(i,j)!=seq_rand_sar(i,j) && seq_rand_sar0(i,j)!=seq_rand_sar1(i,j))
+                        {
+                            S_uncertainty=S_uncertainty+1;
                         }
                         if (seq_rand_sar0(i,j)==seq_rand_sar01(i,j))
                         {
@@ -152,6 +158,10 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
                             else if (temp!=seq_evo_sar(i,j))
                             {
                                 N_err_All_out_S=N_err_All_out_S+1;
+                            }
+                            if (temp1!=seq_rand_sar(i,j) && temp1!=seq_rand_sar1(i,j))
+                            {
+                                S_uncertainty_all=S_uncertainty_all+1;
                             }
                         }
                     }
@@ -294,6 +304,8 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
         SA_out_temp(5,j-1,rand_times)=N_right_SA_out-N_right_SA_out_S;
         SA_out_temp(6,j-1,rand_times)=N_err_SA_out-N_err_SA_out_S;
         SA_out_temp(7,j-1,rand_times)=N_uncertainty;
+        SA_out_temp(8,j-1,rand_times)=S_uncertainty;
+        SA_out_temp(9,j-1,rand_times)=N_uncertainty-S_uncertainty;
         All_out_temp(1,j-1,rand_times)=N_right_All_out;
         All_out_temp(2,j-1,rand_times)=N_err_All_out;
         All_out_temp(3,j-1,rand_times)=N_right_All_out_S;
@@ -301,6 +313,8 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
         All_out_temp(5,j-1,rand_times)=N_right_All_out-N_right_All_out_S;
         All_out_temp(6,j-1,rand_times)=N_err_All_out-N_err_All_out_S;
         All_out_temp(7,j-1,rand_times)=N_uncertainty_all;
+        All_out_temp(8,j-1,rand_times)=S_uncertainty_all;
+        All_out_temp(9,j-1,rand_times)=N_uncertainty_all-S_uncertainty_all;
         Similarity(1,j-1,duplic)=j;
         double sum5=S_similarity00+NS_similarity00;
         double sum51=S_similarity01+NS_similarity01;
@@ -337,6 +351,8 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
         int N_right_SA_out_S=0;
         int N_err_SA_out_S=0;
         int N_uncertainty=0;
+        int S_uncertainty=0;
+        int S_uncertainty_all=0;
         for (int i=1;i<=seq_length;i++)
         {
            int temp=0;
@@ -415,6 +431,10 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
                         {
                             N_err_SA_out_S=N_err_SA_out_S+1;
                         }
+                        if (seq_rand_sar0(i,j)!=seq_rand_sar(i,j) && seq_rand_sar0(i,j)!=seq_rand_sar1(i,j))
+                        {
+                            S_uncertainty=S_uncertainty+1;
+                        }
                         if (seq_rand_sar0(i,j)==seq_rand_sar01(i,j))
                         {
                             temp1=seq_rand_sar0(i,j);
@@ -434,6 +454,10 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
                             {
                                 N_err_All_out_S=N_err_All_out_S+1;
                             }
+                            if (temp1!=seq_rand_sar(i,j) && temp1!=seq_rand_sar1(i,j))
+                            {
+                                S_uncertainty_all=S_uncertainty_all+1;
+                            }
                         }
                     }
                 }
@@ -446,6 +470,8 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
         SA_out_temp(5,j-1,rand_times)=N_right_SA_out-N_right_SA_out_S;
         SA_out_temp(6,j-1,rand_times)=N_err_SA_out-N_err_SA_out_S;
         SA_out_temp(7,j-1,rand_times)=N_uncertainty;
+        SA_out_temp(8,j-1,rand_times)=S_uncertainty;
+        SA_out_temp(9,j-1,rand_times)=N_uncertainty-S_uncertainty;
         All_out_temp(1,j-1,rand_times)=N_right_All_out;
         All_out_temp(2,j-1,rand_times)=N_err_All_out;
         All_out_temp(3,j-1,rand_times)=N_right_All_out_S;
@@ -453,6 +479,8 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
         All_out_temp(5,j-1,rand_times)=N_right_All_out-N_right_All_out_S;
         All_out_temp(6,j-1,rand_times)=N_err_All_out-N_err_All_out_S;
         All_out_temp(7,j-1,rand_times)=N_uncertainty_all;
+        All_out_temp(8,j-1,rand_times)=S_uncertainty_all;
+        All_out_temp(9,j-1,rand_times)=N_uncertainty_all-S_uncertainty_all;
     }
 }
 

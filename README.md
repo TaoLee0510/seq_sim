@@ -61,16 +61,24 @@ example:
   
   1, Parameters.txt: list the input parameters to run the program.
   
+  
   2, similarity_ref_evo.txt: The divergency between ref and evo sequences. [colunms: filelables; over_all_divergency; synonymous_site_divergency; non-synonymous_site_divergency].
+  
   
   3, Similarity_(n).txt: The divergency between N1 and N2 of nth simulation. [colunms: days(value x time_interval); over_all_divergency; synonymous_site_divergency; non-synonymous_site_divergency].
   
+  
   4, Similarity_divergency_(n).txt: The divergency between N3 and N4 of nth simulation. [colunms: days(value x time_interval); over_all_divergency; synonymous_site_divergency; non-synonymous_site_divergency].
+  
   
   5, results_single_out_(n).txt: Results of N1 as outgroup. [$1:over_all_correct_number; $2:over_all_error_number; $3: over_all_error_rate; $4: synonymous site_correct_number; $5: synonymous site_error_number; $6: synonymous site_error_rate; $7: non-synonymous_correct_number; $8: non-synonymous_error_number; $9: non-synonymous site_error_rate; $10: uncertainty_number; $11: uncertainty_rate; $12: synonymous uncertainty_number; $13: synonymous uncertainty_rate; $14: non-synonymous uncertainty_number; $15: non-synonymous uncertainty_rate].
   
+  
   6, results_double_out_(n).txt: Results of N1 and N6 as outgroups. [$1:over_all_correct_number; $2:over_all_error_number; $3: over_all_error_rate; $4: synonymous site_correct_number; $5: synonymous site_error_number; $6: synonymous site_error_rate; $7: non-synonymous_correct_number; $8: non-synonymous_error_number; $9: non-synonymous site_error_rate; $10: uncertainty_number; $11: uncertainty_rate; $12: synonymous uncertainty_number; $13: synonymous uncertainty_rate; $14: non-synonymous uncertainty_number; $15: non-synonymous uncertainty_rate].
+  
+  
    7, mutation.txt: A mutation number record during time. [$1:Total mutation; $2-$5: inner check number, omit them; $6: mutaions ocurred during whole simulation time; $7: synonymous mutations ocurred during whole simulation time; $8: Non-synonymous mutations ocurred during whole simulation time; $9: Total mutations fixed; $10: Synonymous mutations fixed; $11: Non-synoymous mutations fixed]
+   
   
   If the output_evo_seq_file=1, the following files would be outputed.
   

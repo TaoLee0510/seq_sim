@@ -1,16 +1,19 @@
 # seq_sim
+
 in-silico evolutionary process to identify the confidence of phylogeny tree based on a specific out-group or out-groups. 
 To complie the codes, the blitz++ and gsl are required. The gsl may NOT compatible with Windows system, please switch to MacOS or a Linux based system.
+
+Author: Li Tao
 
 Need help? Contact me via e-mail: aeolia.zafiro@gmail.com
 
 Usage:
 
-./seq_sim --evolving_sequence=path --reference_sequence=path --codon_file=path --substitution_file=path --seq_length=int --mutation_rate=double --Evolution_days=int --Pre_evolution_days=int --time_interval=int --simulation_times=int --Divergence=double --Divergency_sampling_times=int --output_evo_seq_file=int --KaKS=double
+./seq_sim --evolving_sequence=path --reference_sequence=path --codon_file=path --substitution_file=path --substitution_file_outgroup1=path --substitution_file_outgroup2=path --seq_length=int --mutation_rate=double --Evolution_days=int --Pre_evolution_days=int --time_interval=int --simulation_times=int --Divergence=double --Divergency_sampling_times=int --output_evo_seq_file=int --KaKS=double --n_selection=double
 
 example:
 
-./seq_simu --evolving_sequence=./Sars_cov_2_orig.txt --reference_sequence=./TG13_orig.txt --codon_file=./codon.txt --substitution_file=./substitution.txt --seq_length=29274 --mutation_rate=0.2542 --Evolution_days=30000 --Pre_evolution_days=54000 --time_interval=100 --simulation_times=200 --Divergence=0.001 --Divergency_sampling_times=1000 --output_evo_seq_file=0 --KaKS=0.05
+./seq_simu --evolving_sequence=./Sars_cov_2_orig.txt --reference_sequence=./TG13_orig.txt --codon_file=./ns_and_s.txt --substitution_file=./site_freq.txt --substitution_file_outgroup1=./site_freq_outgroup1.txt --substitution_file_outgroup2=./site_freq_outgroup2.txt --seq_length=29274 --mutation_rate=0.2542 --mutation_rate_outgroup1=0.2537 --mutation_rate_outgroup2=0.2534 --Evolution_days=30000 --Pre_evolution_days=54000 --time_interval=100 --simulation_times=34 --Divergence=0.005 --Divergency_sampling_times=1000 --output_evo_seq_file=0 --KaKS=0.05 --n_selection=0
   
   Input:
   
@@ -42,16 +45,15 @@ example:
   
   KaKS: The Value of Ka/Ks.
   
+  n_selection: A Ka/Ks value to control the evolutionary process during t3.
     
   Note:
   
   1, In order to make the program run easily, all Base and amino acids names should convert into digital. Here we stipulate the A=1, T=2, G=3, C=4, others (including gaps)=0. the amino acids could convert into any int type digital as you like.
   
-  2, The evolving_sequence reference_sequence should be aligned before inputting to the program.
+  2, The formate of evolving_sequence and reference_sequence is a txt formate file with space character is used as the column delimiter.
   
-  3, The formate of evolving_sequence and reference_sequence is a txt formate file with space character is used as the column delimiter.
-  
-  4, The codon_file is a 62 x 4 (row x column) file (codon.txt). The substitution_file is a 12 x 4 (row x column) file (substitution.txt). Users can generate these two files to suit their objects. if the dimension is not the same as the examples, one easy way is to fill the related rows with 0. OR recreated the dimension settings on related .hpp files.
+  3, The codon_file is a 62 x 4 (row x column) file (codon.txt). The substitution_file is a 12 x 4 (row x column) file (substitution.txt). Users can generate these two files to suit their objects. if the dimension is not the same as the examples, one easy way is to fill the related rows with 0. OR recreated the dimension settings on related .hpp files.
         
   Output:
   
@@ -65,9 +67,10 @@ example:
   
   4, Similarity_divergency_(n).txt: The divergency between N3 and N4 of nth simulation. [colunms: days(value x time_interval); over_all_divergency; synonymous_site_divergency; non-synonymous_site_divergency].
   
-  5, results_single_out_(n).txt: Results of N1 as outgroup. [colunms: over_all_correct_number; over_all_error_number; over_all_error_rate; synonymous site_correct_number; synonymous site_error_number; synonymous site_error_rate; non-synonymous_correct_number; non-synonymous_error_number; non-synonymous site_error_rate; uncertainty_number; uncertainty_rate].
+  5, results_single_out_(n).txt: Results of N1 as outgroup. [$1:over_all_correct_number; $2:over_all_error_number; $3: over_all_error_rate; $4: synonymous site_correct_number; $5: synonymous site_error_number; $6: synonymous site_error_rate; $7: non-synonymous_correct_number; $8: non-synonymous_error_number; $9: non-synonymous site_error_rate; $10: uncertainty_number; $11: uncertainty_rate; $12: synonymous uncertainty_number; $13: synonymous uncertainty_rate; $14: non-synonymous uncertainty_number; $15: non-synonymous uncertainty_rate].
   
-  6, results_double_out_(n).txt: Results of N1 and N6 as outgroups. [colunms: over_all_correct_number; over_all_error_number; over_all_error_rate; synonymous site_correct_number; synonymous site_error_number; synonymous site_error_rate; non-synonymous_correct_number; non-synonymous_error_number; non-synonymous site_error_rate; uncertainty_number; uncertainty_rate].
+  6, results_double_out_(n).txt: Results of N1 and N6 as outgroups. [$1:over_all_correct_number; $2:over_all_error_number; $3: over_all_error_rate; $4: synonymous site_correct_number; $5: synonymous site_error_number; $6: synonymous site_error_rate; $7: non-synonymous_correct_number; $8: non-synonymous_error_number; $9: non-synonymous site_error_rate; $10: uncertainty_number; $11: uncertainty_rate; $12: synonymous uncertainty_number; $13: synonymous uncertainty_rate; $14: non-synonymous uncertainty_number; $15: non-synonymous uncertainty_rate].
+   7, mutation.txt: A mutation number record during time. [$1:Total mutation; $2-$5: inner check number, omit them; $6: mutaions ocurred during whole simulation time; $7: synonymous mutations ocurred during whole simulation time; $8: Non-synonymous mutations ocurred during whole simulation time; $9: Total mutations fixed; $10: Synonymous mutations fixed; $11: Non-synoymous mutations fixed]
   
   If the output_evo_seq_file=1, the following files would be outputed.
   

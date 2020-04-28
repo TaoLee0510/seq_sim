@@ -73,7 +73,7 @@ void extral_results(Array<double, 3> SA_out_temp, Array<double, 3> All_out_temp,
         }
         else
         {
-            SA_out(13,j,duplic)=SA_out(11,j,duplic)/sum5;
+            SA_out(13,j,duplic)=SA_out(12,j,duplic)/sum5;
         }
         
         SA_out(14,j,duplic)=mean(SA_out_temp(9,j,all));
@@ -84,7 +84,7 @@ void extral_results(Array<double, 3> SA_out_temp, Array<double, 3> All_out_temp,
         }
         else
         {
-            SA_out(15,j,duplic)=SA_out(11,j,duplic)/sum6;
+            SA_out(15,j,duplic)=SA_out(14,j,duplic)/sum6;
         }
         
         
@@ -141,7 +141,7 @@ void extral_results(Array<double, 3> SA_out_temp, Array<double, 3> All_out_temp,
         }
         else
         {
-            All_out(13,j,duplic)=All_out(11,j,duplic)/sum5;
+            All_out(13,j,duplic)=All_out(12,j,duplic)/sum5;
         }
         
         All_out(14,j,duplic)=mean(All_out_temp(9,j,all));
@@ -152,7 +152,7 @@ void extral_results(Array<double, 3> SA_out_temp, Array<double, 3> All_out_temp,
         }
         else
         {
-            All_out(15,j,duplic)=All_out(11,j,duplic)/sum6;
+            All_out(15,j,duplic)=All_out(14,j,duplic)/sum6;
         }
         
     }

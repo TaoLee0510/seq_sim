@@ -32,33 +32,38 @@ void similarity_tg(Array<int, 2> codon, Array<int, 2> seq_orig_sar,Array<int, 2>
 {
     int NS_similarity=0;
     int S_similarity=0;
+    int all=0;
     for (int i=1;i<=seq_length;i++)
     {
-        if (seq_orig_sar(i,1)!=seq_orig_tg(i,1))
+        if (seq_orig_sar(i,1)!=0 && seq_orig_tg(i,1)!=0)
         {
-            if (i%3==0)
+            if (seq_orig_sar(i,1)!=seq_orig_tg(i,1))
             {
-                int s=NS_judge(i,seq_orig_sar,seq_orig_tg,codon,1);
-                if (s==1)
+                if (i%3==0)
                 {
-                    S_similarity=S_similarity+1;
+                    int s=NS_judge(i,seq_orig_sar,seq_orig_tg,codon,1);
+                    if (s==1)
+                    {
+                        S_similarity=S_similarity+1;
+                    }
+                    else
+                    {
+                        NS_similarity=NS_similarity+1;
+                    }
                 }
                 else
                 {
                     NS_similarity=NS_similarity+1;
                 }
             }
-            else
-            {
-                NS_similarity=NS_similarity+1;
-            }
         }
+        all=all+1;
     }
     Similarity_tg(times,1)=1;
-    double NS_site_number=seq_length*3.5/4.5;
-    double S_site_number=seq_length/4.5;
+    double NS_site_number=all*3.5/4.5;
+    double S_site_number=all/4.5;
     double sum5=S_similarity+NS_similarity;
-    Similarity_tg(times,2)=sum5/seq_length;
+    Similarity_tg(times,2)=sum5/all;
     Similarity_tg(times,3)=S_similarity/S_site_number;
     Similarity_tg(times,4)=NS_similarity/NS_site_number;
 }

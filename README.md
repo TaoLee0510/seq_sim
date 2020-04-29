@@ -13,7 +13,7 @@ Usage:
 
 example:
 
-./seq_simu --evolving_sequence=./Sars_cov_2_orig.txt --reference_sequence=./TG13_orig.txt --codon_file=./ns_and_s.txt --substitution_file=./site_freq.txt --substitution_file_outgroup1=./site_freq_outgroup1.txt --substitution_file_outgroup2=./site_freq_outgroup2.txt --seq_length=29274 --mutation_rate=0.2542 --mutation_rate_outgroup1=0.2537 --mutation_rate_outgroup2=0.2534 --Evolution_days=30000 --Pre_evolution_days=54000 --time_interval=100 --simulation_times=34 --Divergence=0.005 --Divergency_sampling_times=1000 --output_evo_seq_file=0 --KaKS=0.05 --n_selection=0
+./seq_simu --evolving_sequence=./Sars_cov_2_orig.txt --reference_sequence=./TG13_orig.txt --codon_file=./ns_and_s.txt --substitution_file=./site_freq.txt --substitution_file_outgroup1=./site_freq_outgroup1.txt --substitution_file_outgroup2=./site_freq_outgroup2.txt --seq_length=29274 --mutation_rate=0.2542 --mutation_rate_outgroup1=0.2537 --mutation_rate_outgroup2=0.2534 --Evolution_days=30000 --Pre_evolution_days=27000 --time_interval=100 --simulation_times=34 --Divergence=0.005 --Divergency_sampling_times=1000 --output_evo_seq_file=0 --KaKS=0.05 --n_selection=0
   
   Input:
   
@@ -31,7 +31,7 @@ example:
   
   Evolution_days: Days of the evolving_sequence evolved.
   
-  Pre_evolution_days: Additional evolution times of a sequence to generate a "outgroup" with a further distance.
+  Pre_evolution_days: Additional evolution times of sequences to generate a "outgroup" with a further distance.
   
   time_interval: This parameter sets the time interval to record the evolved sequence. Meanwhile, at the recording time, the program calculated confidence.
   

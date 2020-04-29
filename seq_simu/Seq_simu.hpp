@@ -166,7 +166,6 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar, double mutati
         seq_orig_sar(all,1)=seq_sar0(all,1);
         int dd=duplic+1;
         similarity_tg(codon, seq_sar0, seq_sar2, Similarity_tg, seq_length,dd);
-        cout << Similarity_tg<<endl;
         //////////////////////////////////////////////////// mutation number initiation /////////////////////////////////////////////
         int *mutation_number_sar=new int[DDAAYY];
         mutation_number_sar=random_poisson(DDAAYY, probability_of_mutation_sar);

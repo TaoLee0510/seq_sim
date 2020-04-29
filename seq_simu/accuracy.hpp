@@ -62,6 +62,8 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
         {
             int temp=0;
             int temp1=0;
+            int temp2=0;
+            int temp0=0;
             if (seq_rand_sar(i,j)!=seq_rand_sar1(i,j))
             {
                 if (seq_rand_sar0(i,j)==seq_rand_sar(i,j))
@@ -110,7 +112,68 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
                 }
                 else
                 {
-                    N_uncertainty_all=N_uncertainty_all+1;
+                    temp1=seq_rand_sar0(i,j);
+                    temp2=seq_rand_sar01(i,j);
+                    if (temp1==seq_rand_sar(i,j))
+                    {
+                        temp=temp1;
+                    }
+                    if (temp1==seq_rand_sar1(i,j))
+                    {
+                        temp=temp1;
+                    }
+                    if (temp2==seq_rand_sar(i,j))
+                    {
+                        temp0=temp2;
+                    }
+                    if (temp2==seq_rand_sar1(i,j))
+                    {
+                        temp0=temp2;
+                    }
+                    if (temp==0 && temp0==0)
+                    {
+                        N_uncertainty_all=N_uncertainty_all+1;
+                    }
+                    if (temp!=0 && temp0!=0)
+                    {
+                        if (temp==seq_evo_sar(i,j))
+                        {
+                            N_right_All_out=N_right_All_out+1;
+                        }
+                        else
+                        {
+                            if (temp0==seq_evo_sar(i,j))
+                            {
+                                N_right_All_out=N_right_All_out+1;
+                            }
+                            else
+                            {
+                                N_err_All_out=N_err_All_out+1;
+                            }
+                        }
+                    }
+                    if (temp==0 && temp0!=0)
+                    {
+                        if(temp0==seq_evo_sar(i,j))
+                        {
+                            N_right_All_out=N_right_All_out+1;
+                        }
+                        else
+                        {
+                            N_err_All_out=N_err_All_out+1;
+                        }
+                    }
+                    if (temp!=0 && temp0==0)
+                    {
+                        if(temp==seq_evo_sar(i,j))
+                        {
+                            N_right_All_out=N_right_All_out+1;
+                        }
+                        else
+                        {
+                            N_err_All_out=N_err_All_out+1;
+                        }
+                    }
                 }
                 if (i%3==0)
                 {
@@ -162,6 +225,71 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
                             if (temp1!=seq_rand_sar(i,j) && temp1!=seq_rand_sar1(i,j))
                             {
                                 S_uncertainty_all=S_uncertainty_all+1;
+                            }
+                        }
+                        else
+                        {
+                            temp1=seq_rand_sar0(i,j);
+                            temp2=seq_rand_sar01(i,j);
+                            if (temp1==seq_rand_sar(i,j))
+                            {
+                                temp=temp1;
+                            }
+                            if (temp1==seq_rand_sar1(i,j))
+                            {
+                                temp=temp1;
+                            }
+                            if (temp2==seq_rand_sar(i,j))
+                            {
+                                temp0=temp2;
+                            }
+                            if (temp2==seq_rand_sar1(i,j))
+                            {
+                                temp0=temp2;
+                            }
+                            if (temp==0 && temp0==0)
+                            {
+                                S_uncertainty_all=S_uncertainty_all+1;
+                            }
+                            if (temp!=0 && temp0!=0)
+                            {
+                                if (temp==seq_evo_sar(i,j))
+                                {
+                                    N_right_All_out_S=N_right_All_out_S+1;
+                                }
+                                else
+                                {
+                                    if (temp0==seq_evo_sar(i,j))
+                                    {
+                                        N_right_All_out_S=N_right_All_out_S+1;
+                                    }
+                                    else
+                                    {
+                                        N_err_All_out_S=N_err_All_out_S+1;
+                                    }
+                                }
+                            }
+                            if (temp==0 && temp0!=0)
+                            {
+                                if(temp0==seq_evo_sar(i,j))
+                                {
+                                    N_right_All_out_S=N_right_All_out_S+1;
+                                }
+                                else
+                                {
+                                    N_err_All_out_S=N_err_All_out_S+1;
+                                }
+                            }
+                            if (temp!=0 && temp0==0)
+                            {
+                                if(temp==seq_evo_sar(i,j))
+                                {
+                                    N_right_All_out_S=N_right_All_out_S+1;
+                                }
+                                else
+                                {
+                                    N_err_All_out_S=N_err_All_out_S+1;
+                                }
                             }
                         }
                     }
@@ -355,8 +483,10 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
         int S_uncertainty_all=0;
         for (int i=1;i<=seq_length;i++)
         {
-           int temp=0;
+            int temp=0;
             int temp1=0;
+            int temp2=0;
+            int temp0=0;
             if (seq_rand_sar(i,j)!=seq_rand_sar1(i,j))
             {
                 if (seq_rand_sar0(i,j)==seq_rand_sar(i,j))
@@ -405,7 +535,68 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
                 }
                 else
                 {
-                    N_uncertainty_all=N_uncertainty_all+1;
+                    temp1=seq_rand_sar0(i,j);
+                    temp2=seq_rand_sar01(i,j);
+                    if (temp1==seq_rand_sar(i,j))
+                    {
+                        temp=temp1;
+                    }
+                    if (temp1==seq_rand_sar1(i,j))
+                    {
+                        temp=temp1;
+                    }
+                    if (temp2==seq_rand_sar(i,j))
+                    {
+                        temp0=temp2;
+                    }
+                    if (temp2==seq_rand_sar1(i,j))
+                    {
+                        temp0=temp2;
+                    }
+                    if (temp==0 && temp0==0)
+                    {
+                        N_uncertainty_all=N_uncertainty_all+1;
+                    }
+                    if (temp!=0 && temp0!=0)
+                    {
+                        if (temp==seq_evo_sar(i,j))
+                        {
+                            N_right_All_out=N_right_All_out+1;
+                        }
+                        else
+                        {
+                            if (temp0==seq_evo_sar(i,j))
+                            {
+                                N_right_All_out=N_right_All_out+1;
+                            }
+                            else
+                            {
+                                N_err_All_out=N_err_All_out+1;
+                            }
+                        }
+                    }
+                    if (temp==0 && temp0!=0)
+                    {
+                        if(temp0==seq_evo_sar(i,j))
+                        {
+                            N_right_All_out=N_right_All_out+1;
+                        }
+                        else
+                        {
+                            N_err_All_out=N_err_All_out+1;
+                        }
+                    }
+                    if (temp!=0 && temp0==0)
+                    {
+                        if(temp==seq_evo_sar(i,j))
+                        {
+                            N_right_All_out=N_right_All_out+1;
+                        }
+                        else
+                        {
+                            N_err_All_out=N_err_All_out+1;
+                        }
+                    }
                 }
                 if (i%3==0)
                 {
@@ -457,6 +648,71 @@ void accuracy (Array<int, 2> codon, Array<int, 2> seq_orig_sar, Array<int, 2> se
                             if (temp1!=seq_rand_sar(i,j) && temp1!=seq_rand_sar1(i,j))
                             {
                                 S_uncertainty_all=S_uncertainty_all+1;
+                            }
+                        }
+                        else
+                        {
+                            temp1=seq_rand_sar0(i,j);
+                            temp2=seq_rand_sar01(i,j);
+                            if (temp1==seq_rand_sar(i,j))
+                            {
+                                temp=temp1;
+                            }
+                            if (temp1==seq_rand_sar1(i,j))
+                            {
+                                temp=temp1;
+                            }
+                            if (temp2==seq_rand_sar(i,j))
+                            {
+                                temp0=temp2;
+                            }
+                            if (temp2==seq_rand_sar1(i,j))
+                            {
+                                temp0=temp2;
+                            }
+                            if (temp==0 && temp0==0)
+                            {
+                                S_uncertainty_all=S_uncertainty_all+1;
+                            }
+                            if (temp!=0 && temp0!=0)
+                            {
+                                if (temp==seq_evo_sar(i,j))
+                                {
+                                    N_right_All_out_S=N_right_All_out_S+1;
+                                }
+                                else
+                                {
+                                    if (temp0==seq_evo_sar(i,j))
+                                    {
+                                        N_right_All_out_S=N_right_All_out_S+1;
+                                    }
+                                    else
+                                    {
+                                        N_err_All_out_S=N_err_All_out_S+1;
+                                    }
+                                }
+                            }
+                            if (temp==0 && temp0!=0)
+                            {
+                                if(temp0==seq_evo_sar(i,j))
+                                {
+                                    N_right_All_out_S=N_right_All_out_S+1;
+                                }
+                                else
+                                {
+                                    N_err_All_out_S=N_err_All_out_S+1;
+                                }
+                            }
+                            if (temp!=0 && temp0==0)
+                            {
+                                if(temp==seq_evo_sar(i,j))
+                                {
+                                    N_right_All_out_S=N_right_All_out_S+1;
+                                }
+                                else
+                                {
+                                    N_err_All_out_S=N_err_All_out_S+1;
+                                }
                             }
                         }
                     }

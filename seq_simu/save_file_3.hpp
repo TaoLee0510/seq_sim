@@ -20,15 +20,19 @@ void save_file_3 (Array<double,2> results0, Array<double,2> results1,int times)
     sprintf(filedir31, "./similarity_ref_evo.txt");
     FILE * fid31;
     fid31=fopen (filedir31,"w+");
-    for(int co=1;co<=4;co++)
+    int ii=times+1;
+    for (int i=1;i<=ii;i++)
     {
-        if(co<4)
+        for(int co=1;co<=4;co++)
         {
-            fprintf(fid31,"%f\t",results0(1,co));
-        }
-        else
-        {
-            fprintf(fid31,"%f\n",results0(1,co));
+            if(co<4)
+            {
+                fprintf(fid31,"%f\t",results0(i,co));
+            }
+            else
+            {
+                fprintf(fid31,"%f\n",results0(i,co));
+            }
         }
     }
     fclose(fid31);

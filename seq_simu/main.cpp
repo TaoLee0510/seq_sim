@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  seq_simu Ver. 5.05
+//  seq_simu Ver. 5.2
 //
 //  Created by Taolee on 3/29/20.
 //  Copyright © 2020 Taolee. All rights reserved.

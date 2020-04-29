@@ -54,6 +54,8 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar, double mutati
     seq_orig_tg=0;
     Array<int, 2> seq_sar(seq_length,1,FortranArray<2>());//seq matrix
     seq_sar=0;
+    Array<int, 2> seq_sar0(seq_length,1,FortranArray<2>());//seq matrix
+    seq_sar0=0;
     Array<int, 2> seq_sar1(seq_length,1,FortranArray<2>());//seq matrix
     seq_sar1=0;
     Array<int, 2> seq_sar2(seq_length,1,FortranArray<2>());//seq matrix
@@ -94,7 +96,7 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar, double mutati
     Similarity=0;
     Array<double, 3> Similarity1(4,D,times,FortranArray<3>());
     Similarity1=0;
-    Array<double, 2> Similarity_tg(1,4,FortranArray<2>());
+    Array<double, 2> Similarity_tg(times+1,4,FortranArray<2>());
     Similarity_tg=0;
     Array<double, 3> Similarity_divergency(4,D,times,FortranArray<3>());
     Similarity_divergency=0;
@@ -127,8 +129,8 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar, double mutati
     m_loci=0;
     /////////////////////////////////////////////////// innitiation /////////////////////////////////////////////
     double selections=KaKS;
-    double NS_site_number=seq_length*3.5/4.5;
-    double S_site_number=seq_length/4.5;
+    double NS_site_number=m_loci_sar*3.5/4.5;
+    double S_site_number=m_loci_sar/4.5;
     
     int forward_evo_time=0;
     if (n_selection>0)
@@ -139,7 +141,6 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar, double mutati
     {
         forward_evo_time=ceil((Divergence*m_loci_sar)/(probability_of_mutation_sar))/2;
     }
-    cout << "forward_evo_time:"   << forward_evo_time << endl;
     int duplic=1;
     for (duplic=1;duplic<=times;duplic++)
     {
@@ -148,17 +149,24 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar, double mutati
         seq_evo_sar1(all,1)=seq_orig_sar(all,1);
         seq_sar1(all,1)=seq_orig_sar(all,1);
         seq_sar2(all,1)=seq_orig_sar(all,1);
+        seq_sar0(all,1)=seq_orig_sar(all,1);
         //////////////////////////////////////////////////// pre evolution /////////////////////////////////////////////
         int *mutation_number_sar0=new int[DAY_pa];
         mutation_number_sar0=random_poisson(DAY_pa, mutation_rate_outgroup2);
+        int *mutation_number_sar00=new int[DAY_pa];
+        mutation_number_sar00=random_poisson(DAY_pa, probability_of_mutation_sar);
         int day=1;
         int mutation_real_s=0;
         int mutation_real_ns=0;
         for (day=1;day<=DAY_pa;day++)
         {
-            pre_evolution(sitefreq_out2, codon, seq_orig_sar, seq_sar2, mutation_number_sar0, m_loci_sar, mutation_location_sar, seq_length, day,duplic,selections, mutation_real_s, mutation_real_ns);
+            pre_evolution(sitefreq, sitefreq_out2, codon, seq_orig_sar, seq_sar0, seq_sar2, mutation_number_sar00, mutation_number_sar0, m_loci_sar, mutation_location_sar, seq_length, day,duplic,selections, mutation_real_s, mutation_real_ns);
         }
         seq_evo_sar2(all,1)=seq_sar2(all,1);
+        seq_orig_sar(all,1)=seq_sar0(all,1);
+        int dd=duplic+1;
+        similarity_tg(codon, seq_sar0, seq_sar2, Similarity_tg, seq_length,dd);
+        cout << Similarity_tg<<endl;
         //////////////////////////////////////////////////// mutation number initiation /////////////////////////////////////////////
         int *mutation_number_sar=new int[DDAAYY];
         mutation_number_sar=random_poisson(DDAAYY, probability_of_mutation_sar);
@@ -231,6 +239,8 @@ void Seq_simu (int seq_length, double probability_of_mutation_sar, double mutati
         mutatioin_number(duplic,8)=Similarity1(2,D,duplic)*seq_length;
         mutatioin_number(duplic,9)=Similarity1(3,D,duplic)*S_site_number;
         mutatioin_number(duplic,10)=Similarity1(4,D,duplic)*NS_site_number;
+        delete[] mutation_number_sar00;
+        mutation_number_sar00 = NULL;
         delete[] mutation_number_sar0;
         mutation_number_sar0 = NULL;
         delete[] mutation_number_sar;

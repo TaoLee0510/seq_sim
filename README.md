@@ -8,7 +8,11 @@ Author: Li Tao
 
 Need help? Contact me via e-mail: aeolia.zafiro@gmail.com
 
-Install:(clang is highly recommanded)
+Install:
+For macOS user:
+Import the project to Xcode to user it directly.
+
+For Linux user:(clang is highly recommanded)
 
 clang++ main.cpp -lgsl -lgslcblas -v -o seq_sim
 

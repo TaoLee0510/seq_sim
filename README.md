@@ -7,12 +7,13 @@ Author: Li Tao
 
 Need help? Contact me via e-mail: aeolia.zafiro@gmail.com
 
-Install:
-g++ main.cpp -lgsl -lgslcblas -v -o seq_sim
+Install:(clang is highly recommanded)
+
+clang++ main.cpp -lgsl -lgslcblas -v -o seq_sim
 
 OR
 
-clang++ main.cpp -lgsl -lgslcblas -v -o seq_sim
+g++ main.cpp -lgsl -lgslcblas -v -o seq_sim
 
 Usage:
 

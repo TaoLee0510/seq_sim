@@ -10,7 +10,7 @@ Need help? Contact me via e-mail: aeolia.zafiro@gmail.com
 
 Install:
 For macOS user:
-Import the project to Xcode to user it directly.
+Import the project to Xcode to use it directly.
 
 For Linux user:(clang is highly recommanded)
 

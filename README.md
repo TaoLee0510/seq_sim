@@ -1,7 +1,8 @@
 # seq_sim
 
-in-silico evolutionary process to identify the confidence of phylogeny tree based on a specific out-group or out-groups. 
-To complie the codes, the blitz++ and gsl are required. The gsl may NOT compatible with Windows system, please switch to MacOS or a Linux based system.
+Seq_sim is an in-silico evolutionary process to identify the confidence of a phylogeny tree based on a specific out-group or out-groups. To compile the codes, the blitz++ and gsl are required. The gsl may NOT compatible with the Windows system, please switch to macOS or a Linux based system.
+
+To compile the codes, the blitz++ and gsl are required. The gsl may NOT compatible with the Windows system, please switch to macOS or a Linux based system.
 
 Author: Li Tao
 

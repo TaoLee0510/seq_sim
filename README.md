@@ -7,6 +7,13 @@ Author: Li Tao
 
 Need help? Contact me via e-mail: aeolia.zafiro@gmail.com
 
+Install:
+g++ main.cpp -lgsl -lgslcblas -v -o seq_sim
+
+OR
+
+clang++ main.cpp -lgsl -lgslcblas -v -o seq_sim
+
 Usage:
 
 ./seq_sim --evolving_sequence=path --reference_sequence=path --codon_file=path --substitution_file=path --substitution_file_outgroup1=path --substitution_file_outgroup2=path --seq_length=int --mutation_rate=double --Evolution_days=int --Pre_evolution_days=int --time_interval=int --simulation_times=int --Divergence=double --Divergency_sampling_times=int --output_evo_seq_file=int --KaKS=double --n_selection=double

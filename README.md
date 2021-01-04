@@ -1,6 +1,8 @@
 # seq_sim
 
-Seq_sim is an in-silico evolutionary process to identify the confidence of a phylogeny tree based on a specific out-group or out-groups. To compile the codes, the blitz++ and gsl are required. The gsl may NOT compatible with the Windows system, please switch to macOS or a Linux based system.
+Seq_sim is an in-silico evolutionary process to identify the confidence of a phylogeny tree based on a specific out-group or out-groups. It associate with the paper "The use of SARS-CoV-2-related coronaviruses from bats and pangolins to polarize mutations in SARS-Cov-2" which published in Science China Life Sciences. doi: 10.1007/s11427-020-1764-2.
+
+To compile the codes, the blitz++ and gsl are required. The gsl may NOT compatible with the Windows system, please switch to macOS or a Linux based system.
 
 To compile the codes, the blitz++ and gsl are required. The gsl may NOT compatible with the Windows system, please switch to macOS or a Linux based system.
 

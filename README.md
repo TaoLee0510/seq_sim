@@ -6,7 +6,7 @@ To compile the codes, the blitz++ and gsl are required. The gsl may NOT compatib
 
 Author: Li Tao
 
-Need help? Contact me via e-mail: aeolia.zafiro@gmail.com
+Need help? Contact me via e-mail: taolee.lit@gmail.com
 
 Install:
 For macOS user:

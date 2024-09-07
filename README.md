@@ -4,8 +4,6 @@ Seq_sim is an in-silico evolutionary process to identify the confidence of a phy
 
 To compile the codes, the blitz++ and gsl are required. The gsl may NOT compatible with the Windows system, please switch to macOS or a Linux based system.
 
-To compile the codes, the blitz++ and gsl are required. The gsl may NOT compatible with the Windows system, please switch to macOS or a Linux based system.
-
 Author: Li Tao
 
 Need help? Contact me via e-mail: taolee.lit@gmail.com
